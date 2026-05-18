@@ -5,16 +5,19 @@ import ShopRecord from "@/lib/models/ShopRecord";
 
 export async function DELETE(
   _request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await connectDB();
 
+    // Await the asynchronous params in Next.js 15
+    const { id } = await params;
+
     // Delete all rows belonging to this session first
-    await ShopRecord.deleteMany({ upload_session_id: params.id });
+    await ShopRecord.deleteMany({ upload_session_id: id });
 
     // Then delete the session itself
-    const deleted = await UploadSession.findByIdAndDelete(params.id);
+    const deleted = await UploadSession.findByIdAndDelete(id);
 
     if (!deleted) {
       return NextResponse.json({ error: "Session not found." }, { status: 404 });
