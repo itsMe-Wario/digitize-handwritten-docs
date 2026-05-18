@@ -5,13 +5,16 @@ import { validateRecord } from "@/lib/validation";
 
 export async function GET(
   _request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await connectDB();
+    
+    // Await the asynchronous params in Next.js 15
+    const { id } = await params;
 
     // Populate the full session including the image for the edit screen
-    const record = await ShopRecord.findById(params.id)
+    const record = await ShopRecord.findById(id)
       .populate("upload_session_id")
       .lean();
 
@@ -28,10 +31,13 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await connectDB();
+    
+    // Await the asynchronous params in Next.js 15
+    const { id } = await params;
     const body = await request.json();
 
     const {
@@ -55,7 +61,7 @@ export async function PUT(
     });
 
     const updated = await ShopRecord.findByIdAndUpdate(
-      params.id,
+      id,
       {
         $set: {
           date, shift: parsedShift, emp_no, opn_code,
@@ -82,11 +88,14 @@ export async function PUT(
 
 export async function DELETE(
   _request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await connectDB();
-    const deleted = await ShopRecord.findByIdAndDelete(params.id);
+    
+    // Await the asynchronous params in Next.js 15
+    const { id } = await params;
+    const deleted = await ShopRecord.findByIdAndDelete(id);
 
     if (!deleted) {
       return NextResponse.json({ error: "Record not found." }, { status: 404 });
