@@ -1,4 +1,4 @@
-# Digitizer
+# Digitizer | Hosted Link : https://digitize-handwritten-docs.vercel.app/
 
 An AI-Powered System that digitizes handwritten log sheets using APIS, stores structured records in MongoDB, and provides a human review workflow with analytics.
 
@@ -169,11 +169,7 @@ npm start
 
 ## Deployment (Free Tier)
 
-**Vercel** (recommended for Next.js):
-```bash
-npm i -g vercel
-vercel deploy
-```
+**Vercel** :
 Add environment variables in Vercel Dashboard → Settings → Environment Variables.
 
 **MongoDB Atlas Free Tier**: M0 cluster (512MB) is sufficient for this prototype.
