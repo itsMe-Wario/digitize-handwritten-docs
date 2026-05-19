@@ -1,29 +1,16 @@
-# Machine Shop Digitizer 🏭
+# Digitizer
 
-An AI-Powered Workflow Automation System that digitizes handwritten manufacturing log sheets using Google Gemini, stores structured records in MongoDB, and provides a human-in-the-loop review workflow with analytics.
+An AI-Powered System that digitizes handwritten log sheets using APIS, stores structured records in MongoDB, and provides a human review workflow with analytics.
 
 ---
 
 ## Features
 
-- **AI OCR Extraction** — Upload handwritten machine shop logs; Gemini 1.5 Flash extracts structured data with per-field confidence scores
+- **AI OCR Extraction** — Upload handwritten machine shop logs;AI extracts structured data with per-field confidence scores
 - **Split-Screen Review** — Side-by-side original image and editable form; low-confidence fields highlighted in red/yellow
 - **Validation Engine** — Business rules: shift range, machine code format, quantity bounds, missing mandatory fields
 - **Dashboard Analytics** — Recharts-powered: status pie, machine quantity bar, shift summary, upload trend
 - **History & Search** — Full table of all records, filterable by status, searchable by Work Order / Emp No / Machine
-
----
-
-## Tech Stack
-
-| Layer | Technology |
-|-------|-----------|
-| Framework | Next.js 15 (App Router) |
-| Language | TypeScript |
-| UI | Tailwind CSS + shadcn/ui + lucide-react |
-| Charts | Recharts |
-| Database | MongoDB + Mongoose |
-| AI Engine | Google Gemini 1.5 Flash (`@google/generative-ai`) |
 
 ---
 
@@ -79,12 +66,12 @@ machine-shop-app/
 ### Prerequisites
 - Node.js 18+ 
 - A [MongoDB Atlas](https://cloud.mongodb.com) free-tier cluster (or local MongoDB)
-- A [Google AI Studio](https://aistudio.google.com/app/apikey) API key (free tier)
+- A [Google AI Studio](https://aistudio.google.com) API key (free tier)
+- A .[Mistral AI] (https://.mistral.ai) API key (free tire)
 
 ### 1. Clone & Install
 
 ```bash
-git clone <your-repo-url>
 cd machine-shop-app
 npm install
 ```
@@ -99,6 +86,7 @@ Edit `.env.local`:
 ```env
 MONGODB_URI=mongodb+srv://<user>:<password>@cluster0.xxxxx.mongodb.net/machine_shop?retryWrites=true&w=majority
 GEMINI_API_KEY=your_gemini_api_key_here
+MISTRAL_API_KEY=your_mistral_api_key_here
 ```
 
 ### 3. Run Development Server
